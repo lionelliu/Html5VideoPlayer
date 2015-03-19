@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>嵌入页面式影音播放器</title>
+<!--<script type="text/javascript" src="video.js"></script>-->
+<style type="text/css">
+article{background-color: #FFFFFF; color:#990;width: 756px;height: 50px;margin-right: auto; margin-left: auto; } 
+#mainf{
+	background:#4a4;
+	height:487px;width:1005px;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;}
+#main{
+	background:#4a4;
+	height:487px;width:867px;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	float:left;
+	}
+#main #slist ul li{list-style-type:none}
+#op{}
+#mainr{
+	background:#333;
+	height:487px;width:130px;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	float:right;
+	}
+section{height:487px;background:#333; width:22%;float:left}
+#slist{
+	width:180px;
+	background:#333;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;}
+aside{height:487px;background:#333; width:77%;float:right;}
+#avideo{
+	background:#000;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;}
+
+</style>
+</head>
+<body>
+<h2 id="aac" align="center" style="color:#ABC">
+	2014校级创新项目【嵌入页面式影音播放器】
+</h2>
+<article>
+<h3 align="center">HTML5 WEB</h3>
+</article>
+<div id="mainf">
+<div id="main">
+<!--左侧-->
+<section>
+<h3 align="center" style="color:#990">我的视频</h3>
+<hr>
+<div id="slist";><!--视频播放列表栏-->
+
+ <ul >
+	<!--<li><a href=""><img src="zs001.jpg" width="120" height="79"></a></li>-->
+	<button id="play1" style=" width:110px; height:79px;  border:0; background:url(youth3.png); no-repeat left top" />
+ </ul><hr size="3" color="#FFF">
+ <ul >
+	<!--<li><a href=""><img src="g001.jpg" width="120" height="79"></a></li>-->
+	<button id="play2" style=" width:110px; height:79px;  border:0; background:url(apple.png); no-repeat left top" />
+ </ul><hr size="3" color="#FFF">
+ <ul >
+	<!--<li><a href=""><img src="tn001.jpg" width="120" height="79"></a></li>-->
+	<button id="play3" style=" width:110px; height:79px;  border:0; background:url(cid.jpg); no-repeat left top" />
+
+</div> 
+</ul>
+<hr>
+<small>
+      正在播放：《<span id="currentMovie">视频0</span>》<br>
+      播放速度：<span id="currentSpeed">1X</span><br>
+      声音大小：<span id="currentVolume">100</span><br>
+</small>
+</section>
+<!--右侧-->
+<aside>
+<div id="avideo">
+<video id="video1" poster="/src/img/bhsj001.jpg" src="youthbark.mp4" type="video/mp4" width="95%" height="410" controls="controls" >你的浏览器不支持Video标签</video>
+<hr width="100%" size="2">
+</div>
+		<div id="op" style="clear:both;">
+            <button id="play">播放</button>
+            <button id="stop">停止</button>
+			<button id="next">》</button>
+			
+			<button id="pause">暂停</button>
+			<button id="prev">《</button>
+			<button id="downVolume">音量-</button>
+            <button id="upVolume">音量+</button>
+            <br/>
+			<button id="fastBackward">减速</button>
+            <button id="fastFoward">加速</button>
+            跳转到:&nbsp <input type="text" id="min" style="width:20px;" value="0"/>:<input type="text" id="sec"  style="width:20px;" value="0"/>
+            <button id="locate">确认</button>
+        </div>
+		
+		<script type="text/javascript">
+            var $  = function(id){return document.getElementById(id);};
+            var _video = $("video1");
+            
+            //视频列表
+　　　　　　　var playList = {
+                current : 0,
+                list : ["youthbark.mp4","004.mp4","005.mp4"]
+            }
+            
+            var videoUtil = {
+				//指定播放视频
+				play1 : function(){
+				 _video.src=playList.list[0];
+                    _video.play();
+				},
+				play2 : function(){
+				 _video.src=playList.list[1];
+                    _video.play();
+				},
+				play3 : function(){
+				 _video.src=playList.list[2];
+                    _video.play();
+				},
+                //播放
+                play : function(){
+                    _video.play();
+                },
+                //暂停
+                pause : function(){
+                    _video.pause();
+                },
+                //停止
+                stop : function(){
+                    _video.currentTime = 0;
+                    _video.pause();
+                },
+                //下一个视频
+                next : function(){
+                    if(playList.current == playList.list.length-1){
+                        playList.current = 0;
+                    }else{
+                        playList.current++;
+                    }
+                    _video.src=playList.list[playList.current];
+                    _video.play();
+                },
+                //前一个视频
+                prev : function(){
+                    if(playList.current == 0){
+                        playList.current = palyList.list.length-1;
+                    }else{
+                        playList.current--;
+                    }
+                    _video.src=playList.list[playList.current];
+                    _video.play();
+                },
+                //加大声音,每次加大1/10
+                upVolume : function(){
+                    _video.volume += 0.1;
+                },
+                //减小声音，每次减小1/10
+                downVolume : function(){
+                    _video.volume -= 0.1;
+                },
+                //翻倍加快播放速度
+                fastFoward : function(){
+                    //FF不支持playbackRate
+　　　　　　　　　　　　if(_video.playbackRate){
+                        _video.playbackRate = _video.playbackRate*2;
+                    }else{
+                        alert("对不起，你的浏览器不支持改变播放速度！");
+                    }
+                    
+                },
+                //降低播放速度
+                fastBackward : function(){
+                    if(_video.playbackRate){
+                        _video.playbackRate = _video.playbackRate/2;
+                    }else{
+                        alert("对不起，你的浏览器不支持改变播放速度！");
+                    }
+                },
+                //跳转到指定时间点播放
+                locate : function(){
+                    var min = $("min").value;
+                    var sec = $("sec").value;
+                    var time = parseInt(min)*60+parseInt(sec);
+                    _video.currentTime = time;
+                    _video.play();
+                },
+                bindEvent : function(){
+                    var self = this;
+                    
+                    //绑定页面上各个按钮的事件
+　　　　　　　　　　　　var btns = document.getElementsByTagName("button");
+                    for(var i = 0 ;i < btns.length ; i++){
+                        var el = btns[i];
+                        el.onclick = self[el.id];
+                    }
+                    
+                    //播放完毕自动播放下一个
+                    _video.onended = function(){
+                         var event = document.createEvent("HTMLEvents");
+                        event.initEvent('click', true, true);
+                        $("next").dispatchEvent(event);
+                    }
+                    
+                    //循环检查视频的当前状态
+                    setInterval(function(){
+                        var speed = _video.playbackRate||1;
+                        var movie = "视频"+(playList.current+1);
+                        var volume = parseInt(_video.volume*100);
+                        $("currentMovie").innerHTML = movie;
+                        $("currentSpeed").innerHTML = speed+"X";
+                        $("currentVolume").innerHTML = volume;
+                    },200);
+                    
+                }
+            };
+            
+            window.onload = function(){
+                videoUtil.bindEvent();
+            }
+            
+        </script>
+</aside>
+</div>
+<div id="mainr">
+<iframe width="129" scrolling="no" height="120" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=4&color=%2300B0F0&icon=1&py=yinchuan&wind=1&num=1"></iframe>
+<!--<script charset="Shift_JIS" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.js"></script>-->
+<hr>
+<a href="http://jquery.com/" target=_blank><img src="w3c3.jpg" width="129" height="122"></a>
+<hr>
+<a href="http://jquery.com/" target=_blank><img src="w3c4.jpg" width="129" height="122"></a>
+<hr>
+<a href="http://www.w3.org/" target=_blank><img src="w3c1.jpg" width="129" height="59"></a>
+</div>
+</div>
+</body>
+
+
+<!--
+<small>
+<p>播放你的视频</p>
+<form>
+<input type="file" name="file" size="11"/>
+<button id="locate">上传</button>
+</form>
+</small>
+视频暂停：
+<script type="text/javascript">
+var myVideo=document.getElementById("video1");
+
+function playPause()
+{ 
+if (myVideo.paused) 
+  myVideo.play(); 
+else 
+  myVideo.pause(); 
+} 
+</script> 
+<button onclick="playPause()">播放/暂停</button>
+
+
+<div id="by1">
+<hr align="left" width="756">
+<video poster="/src/img/youthback1.png" src="/src/video/youthbark.mp4" type="video/mp4" width="756" height="432" controls="controls" >你的浏览器不支持Video标签</video>
+<hr align="left" width="756">
+<hr align="left" width="756">
+<div id="01">
+
+#article2{background-color: #FFFFFF; color:#990;width: 756px;height: 300px;margin-right: auto; margin-left: auto; }
+img{margin-top: 0px;margin-left:0px;margin:0 auto }-->
+<!--保留元素--> 
+<!--body{ text-align:center;}--> 
+<!--<video poster="/src/img/ubuntu3.jpg" src="/src/video/howfast.ogg" type="video/ogg" width="56.5%" height="432" controls="controls">你的浏览器不支持Video标签</video>
+<hr align="center" width="56.5%">
+<img id="img" src="/src/img/x1.png" width="56.5%" height="432" alt="Open Soueces Software"  ></img>
+<hr align="center" width="56.5%">-->
+<!--<small>
+<a href="https://appengine.google.com/" target="_blank"><img src="/src/img/appengine-silver-120x30.gif" width="103" height="25" alt="Powered by GAE"/></a>
+<a href="http://www.debian.org/" target="_blank"> <img src="/src/img/debianlogo1.jpg" alt="Debian" width="103" height="25"></a>
+<a href="http://www.gnu.org/" target="_blank"> <img src="/src/img/gnulogo1.jpg" alt="GNU" width="103" height="25"></a>
+<a href="https://www.appfog.com/" target="_blank"> <img src="/src/img/appfoglogo1.png" alt="AppFog" width="103" height="25"></a>
+<a href="http://www.gentoo.org/" target="_blank"> <img src="/src/img/gentoologo1.jpg" alt="Gentoo" width="103" height="25"></a>
+<a href="http://www.ubuntu.com" target="_blank"> <img src="/src/img/ubuntulogo1.png" alt="Ubuntu" width="103" height="25"></a>
+<a href="http://www.waldenpond.cn/" target="_blank"> <img src="/src/img/slzw1.png" alt="梭罗中文网" width="103" height="25"></a>
+</small>-->
+<!--nav{height: 30px;background:#FF9900;margin-top:53px }
+nav ul li{width: 100px;height: 30px;float :left;line-height:30px}-->
