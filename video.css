@@ -1,0 +1,79 @@
+article{
+	background-color: #FFFFFF;
+	color:#990;
+	width: 756px;
+	height: 50px;
+	margin-right: auto;
+	margin-left: auto 
+	}
+#main{
+	background:#aaa;
+	height:487px;
+	width:1005px;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	}
+#mainl{
+	background:#aaa;
+	height:487px;
+	width:867px;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	float:left;
+	}
+#main #mainl  li{
+	list-style-type: none;
+	margin:0px;
+	}
+#mainr{
+	background:#333;
+	height:487px;
+	width:134px;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	float:right;
+	}
+section{
+	height:487px;
+	background:#333;
+	width:18%;
+	float:left
+	}
+section ul{
+	background:#333;
+	text-align:center;
+	margin:13px;
+	}
+section #list1{
+	width:18%;
+	background:#333;
+	text-align:center;
+	margin:10px;
+	}
+section #list2{
+	width:18%;
+	background:#333;
+	text-align:center;
+	margin:10px;
+	}
+section #list3{
+	width:18%;
+	background:#333;
+	text-align:center;
+	margin:10px;
+	}
+aside{
+	height:487px;
+	background:#333;
+	width:81.5%;
+	float:right;
+	}
+#avideo{
+	background:#000;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	}
